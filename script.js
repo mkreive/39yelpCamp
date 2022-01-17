@@ -47,9 +47,6 @@ app.get("/campgrounds/:id/edit", async (req, res) => {
     const campground = await Campground.findById(req.params.id);
     res.render("campgrounds/edit", { campground });
 });
-app.listen(3000, () => {
-    console.log("Serving on port 3000");
-});
 
 app.put("/campgrounds/:id", async (req, res) => {
     const { id } = req.params;
@@ -57,4 +54,14 @@ app.put("/campgrounds/:id", async (req, res) => {
         ...req.body.campground,
     });
     res.redirect(`/campgrounds/${campground._id}`);
+});
+
+app.delete("/campgrounds/:id", async (req, res) => {
+    const { id } = req.params;
+    await Campground.findByIdAndDelete(id);
+    res.redirect("/campground");
+});
+
+app.listen(3000, () => {
+    console.log("Serving on port 3000");
 });

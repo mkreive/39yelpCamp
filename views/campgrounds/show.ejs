@@ -36,7 +36,10 @@
         </div>
         <div class="mb-5 mt-5">
             <h2>Leave a review</h2>
-            <form action="">
+            <form
+                action="/campgrounds/<%= campground._id %>/reviews"
+                method="POST"
+            >
                 <div class="mb-3">
                     <label class="form-label" for="rating">rating</label>
                     <input

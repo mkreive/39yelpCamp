@@ -12,7 +12,10 @@ const reviews = require("./routes/reviews");
 main().catch((err) => console.log(err));
 
 async function main() {
-    await mongoose.connect("mongodb://localhost:27017/yelp-camp");
+    await mongoose.connect("mongodb://localhost:27017/yelp-camp", {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
     console.log("MONGO CONNECTION OPEN!");
 }
 
@@ -22,6 +25,7 @@ app.set("view engine", "ejs");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/campgrounds", campgrounds);
 app.use("/campgrounds/:id/reviews", reviews);

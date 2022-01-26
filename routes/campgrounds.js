@@ -9,11 +9,14 @@ router.get("/new", isLogedIn, campgrounds.renderNewForm);
 router
     .route("/")
     .get(catchAsync(campgrounds.index))
-    .post(
-        isLogedIn,
-        validateCampground,
-        catchAsync(campgrounds.createCampground)
-    );
+    // .post(
+    //     isLogedIn,
+    //     validateCampground,
+    //     catchAsync(campgrounds.createCampground)
+    // );
+    .post((req, res) => {
+        res.send(req.body);
+    });
 
 router
     .route("/:id")
